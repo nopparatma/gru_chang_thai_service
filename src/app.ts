@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes";
 import masterRoutes from "./routes/masterRoutes";
-import { generateAccessToken, generateRefreshToken } from "./utils/tokenUtils";
 
 dotenv.config();
 
@@ -17,17 +16,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("gru_chang_thai_service is running");
 });
-
-// Temporary token generation route (For Testing Only)
-// app.post("/v1/token/generate", (req: any, res: any) => {
-//   const { userId } = req.body;
-//   if (!userId) return res.status(400).json({ message: "userId is required" });
-
-//   const accessToken = generateAccessToken({ userId });
-//   const refreshToken = generateRefreshToken({ userId });
-
-//   res.json({ accessToken, refreshToken });
-// });
 
 // routes
 app.use("/v1/product", productRoutes);
