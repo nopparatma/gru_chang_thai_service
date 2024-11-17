@@ -4,10 +4,10 @@ import { IMasterConfig } from "./IMasterConfig";
 const collection = "MASTER_CONFIG";
 const masterConfigSchema: Schema = new Schema(
   {
-    KEY: { type: String, required: true },
-    DATA: { type: String, required: true },
-    NAME: { type: String, required: true },
-    STATUS: { type: String, required: true },
+    key: { type: String, required: true },
+    data: { type: String, required: true },
+    name: { type: String, required: true },
+    status: { type: String, required: true },
   },
   {
     collection: collection,

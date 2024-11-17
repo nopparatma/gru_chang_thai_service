@@ -1,38 +1,32 @@
 import { Request, Response } from "express";
-import { MasterConfig } from "../models/masterConfig/masterConfig";
-import { paginate } from "../utils/paginationUtils";
-import { StatusCode } from "../constants/constant";
+import { MasterConfig } from "../models/db/masterConfig/masterConfig";
+import { find } from "../utils/databaseUtils";
+import { ResponseStatusDetails, StatusCode } from "../constants/constant";
 import { createResponse } from "../utils/responseUtils";
-import { IMasterConfig } from "../models/masterConfig/IMasterConfig";
+import { IMasterConfig } from "../models/db/masterConfig/IMasterConfig";
 
 export const getMasterConfig = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const { page = 1, limit = 10 } = req.body;
-
-    const { data = [], pagination } = await paginate(
-      MasterConfig,
-      page,
-      limit
-    );
+    const { data = [] } = await find<IMasterConfig>(MasterConfig);
 
     const masterConfigs: IMasterConfig[] = data.map((element) => ({
-      key: element.KEY,
-      name: element.NAME,
-      data: element.DATA,
-      status: element.STATUS,
+      key: element.key,
+      name: element.name,
+      value: element.value,
+      status: element.status,
     }));
 
-    const response = createResponse(
-      StatusCode.SUCCESS,
-      { masterConfigs },
-      pagination
-    );
+    const { httpStatusCode, rs } = createResponse(StatusCode.SUCCESS, {
+      masterConfigs,
+    });
 
-    res.status(response.httpStatusCode).json(response.rs);
+    res.status(httpStatusCode).json(rs);
   } catch (error) {
-    res.status(500).send("Server error");
+    const { httpStatusCode, message } =
+      ResponseStatusDetails[StatusCode.INTERNAL_SERVER_ERROR];
+    res.status(httpStatusCode).send(message);
   }
 };

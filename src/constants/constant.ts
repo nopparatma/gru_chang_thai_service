@@ -1,11 +1,13 @@
 export enum StatusCode {
   SUCCESS = 1000,
   DATA_NOT_FOUND = 2000,
+  INTERNAL_SERVER_ERROR = 3000,
 }
 
 export enum StatusMessage {
   SUCCESS = "SUCCESS",
   DATA_NOT_FOUND = "DATA NOT FOUND",
+  INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR",
 }
 
 export enum HttpStatusCode {
@@ -89,5 +91,9 @@ export const ResponseStatusDetails = {
   [StatusCode.DATA_NOT_FOUND]: {
     httpStatusCode: HttpStatusCode.OK,
     message: StatusMessage.DATA_NOT_FOUND,
+  },
+  [StatusCode.INTERNAL_SERVER_ERROR]: {
+    httpStatusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
+    message: StatusMessage.INTERNAL_SERVER_ERROR,
   },
 };

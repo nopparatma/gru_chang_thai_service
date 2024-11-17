@@ -1,6 +1,6 @@
 export interface IMasterConfig {
   key: string;
-  data: string;
+  value: string;
   name: string;
   status: string;
 }
