@@ -1,7 +1,7 @@
 export enum StatusCode {
-  SUCCESS = 1000,
-  DATA_NOT_FOUND = 2000,
-  INTERNAL_SERVER_ERROR = 3000,
+  SUCCESS = "1000",
+  DATA_NOT_FOUND = "2000",
+  INTERNAL_SERVER_ERROR = "3000",
 }
 
 export enum StatusMessage {
